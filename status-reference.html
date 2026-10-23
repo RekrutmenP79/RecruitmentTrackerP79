@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Status Progres Reference Check - PT Padepokan Tujuh Sembilan</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body data-page="status-reference" class="bg-gray-50 text-gray-800 min-h-screen flex flex-col justify-between relative">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 shrink-0">
+                <img src="logo.jpg" alt="Logo Portal Rekrutmen" class="h-8 w-auto object-contain" onerror="this.style.display='none'">
+                <span class="font-semibold text-gray-900 tracking-tight text-sm sm:text-base whitespace-nowrap">Portal Rekrutmen</span>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium whitespace-nowrap">
+                <a href="index.html" target="_top" data-nav="home" class="text-gray-600 hover:text-emerald-600 transition">Beranda</a>
+                <a href="status-reference.html" target="_top" data-nav="status-reference" class="text-gray-600 hover:text-emerald-600 transition">Status Progres Reference Check</a>
+                <a href="status-mapping.html" target="_top" data-nav="status-mapping" class="text-gray-600 hover:text-emerald-600 transition">Status Client Mapping</a>
+            </nav>
+
+            <!-- Top Right WhatsApp Button -->
+            <div class="shrink-0">
+                <a href="https://wa.me/6282123758753?text=Halo%20HC%20PT%20Padepokan%20Tujuh%20Sembilan%2C%20saya%20ingin%20bertanya%20terkait%20proses%20rekrutmen."
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Hubungi HR Rekrutmen via WhatsApp"
+                   class="inline-flex items-center justify-center space-x-2 p-2.5 sm:px-4 sm:py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition">
+                    <i class="fab fa-whatsapp text-base"></i>
+                    <span class="hidden sm:inline whitespace-nowrap">Hubungi HR Rekrutmen</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Tandai menu yang sedang aktif berdasarkan data-page pada <body>.
+        (function () {
+            var current = document.body.getAttribute('data-page') || 'home';
+            var links = document.querySelectorAll('[data-nav]');
+
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].getAttribute('data-nav') === current) {
+                    links[i].classList.remove('text-gray-600', 'hover:text-emerald-600');
+                    links[i].classList.add('text-emerald-600', 'font-semibold');
+                    links[i].setAttribute('aria-current', 'page');
+                }
+            }
+        })();
+    </script>
+
+    <!-- Halaman Reference Check Status: pencarian status berdasarkan email kandidat. -->
+    <main class="max-w-4xl mx-auto px-4 py-12 text-center flex-grow flex flex-col justify-center">
+        <div class="bg-white shadow-sm border border-gray-200 rounded-2xl p-8 sm:p-12">
+
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6 mx-auto text-xl">
+                <i class="fas fa-id-card"></i>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+                Status Progres Reference Check
+            </h1>
+            <p class="text-indigo-600 font-semibold text-sm mb-4">
+                PT Padepokan Tujuh Sembilan
+            </p>
+            <p class="text-gray-500 text-sm sm:text-base mb-6 max-w-xl mx-auto leading-relaxed">
+                Masukkan email yang Anda gunakan saat pendaftaran untuk melihat status reference check Anda.
+            </p>
+
+            <!-- Box cek status berdasarkan email kandidat -->
+            <div class="max-w-xl mx-auto text-left bg-gray-50 border border-gray-200 rounded-2xl p-5 sm:p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                        <i class="fas fa-envelope text-sm"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold text-gray-900">Cek Status Anda</h2>
+                        <p class="text-xs text-gray-500">Gunakan email yang Anda daftarkan.</p>
+                    </div>
+                </div>
+
+                <form id="status-form" novalidate>
+                    <label for="candidate-email" class="block text-xs font-semibold text-gray-700 mb-1.5">
+                        Email Kandidat
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="candidate-email"
+                               name="email"
+                               type="email"
+                               inputmode="email"
+                               autocomplete="email"
+                               autocapitalize="none"
+                               spellcheck="false"
+                               maxlength="254"
+                               required
+                               placeholder="Masukkan email kandidat"
+                               aria-describedby="status-hint"
+                               class="flex-1 w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition disabled:bg-gray-100">
+                        <button id="status-submit"
+                                type="submit"
+                                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition">
+                            <i class="fas fa-search text-xs"></i>
+                            <span>Cek Status</span>
+                        </button>
+                    </div>
+                    <p id="status-hint" class="mt-2 text-[11px] text-gray-400">
+                        Hanya status yang terkait dengan email ini yang ditampilkan.
+                    </p>
+                </form>
+
+                <div id="status-result" class="mt-4 hidden" role="status" aria-live="polite"></div>
+            </div>
+
+            <script>
+                (function () {
+                    var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxxyOE_Ng3Qaq04cqvurAJDlZ-Uh7hzOgP41GodH0JVPrmv9Gqtw_H5j8A3RBOOmF_Y/exec";
+                    var form = document.getElementById('status-form');
+                    if (!form) return;
+
+                    var input = document.getElementById('candidate-email');
+                    var button = document.getElementById('status-submit');
+                    var resultBox = document.getElementById('status-result');
+                    var buttonMarkup = button ? button.innerHTML : '';
+
+                    var page = document.body.getAttribute('data-page') || 'status-reference';
+                    var stage = page === 'status-mapping' ? 'client mapping' : 'reference check';
+
+                    var copy = {
+                        under_review: {
+                            box: 'bg-amber-50 border-amber-200',
+                            iconBox: 'bg-amber-100 text-amber-600',
+                            icon: 'fa-clock',
+                            title: 'Sedang Ditinjau',
+                            titleColor: 'text-amber-800',
+                            description: 'Tim HC sedang meninjau ' + stage + ' Anda. Silakan cek kembali secara berkala.'
+                        },
+                        passed: {
+                            box: 'bg-emerald-50 border-emerald-200',
+                            iconBox: 'bg-emerald-100 text-emerald-600',
+                            icon: 'fa-check-circle',
+                            title: 'Lolos',
+                            titleColor: 'text-emerald-800',
+                            description: 'Anda dinyatakan lolos pada tahap ' + stage + '. Tim HC akan menghubungi Anda untuk langkah selanjutnya.'
+                        },
+                        failed: {
+                            box: 'bg-rose-50 border-rose-200',
+                            iconBox: 'bg-rose-100 text-rose-600',
+                            icon: 'fa-times-circle',
+                            title: 'Tidak Lolos',
+                            titleColor: 'text-rose-800',
+                            description: 'Anda dinyatakan tidak lolos pada tahap ' + stage + '. Terima kasih atas waktu dan partisipasi Anda.'
+                        },
+                        not_found: {
+                            box: 'bg-gray-50 border-gray-200',
+                            iconBox: 'bg-gray-100 text-gray-500',
+                            icon: 'fa-search',
+                            title: 'Email Tidak Ditemukan',
+                            titleColor: 'text-gray-800',
+                            description: 'Kami tidak menemukan kandidat dengan email tersebut. Pastikan email yang Anda masukkan sesuai dengan yang terdaftar, atau hubungi HR Rekrutmen.'
+                        },
+                        invalid_email: {
+                            box: 'bg-amber-50 border-amber-200',
+                            iconBox: 'bg-amber-100 text-amber-600',
+                            icon: 'fa-exclamation-circle',
+                            title: 'Email Tidak Valid',
+                            titleColor: 'text-amber-800',
+                            description: 'Masukkan alamat email yang valid.'
+                        },
+                        error: {
+                            box: 'bg-rose-50 border-rose-200',
+                            iconBox: 'bg-rose-100 text-rose-600',
+                            icon: 'fa-exclamation-triangle',
+                            title: 'Gagal Memeriksa Status',
+                            titleColor: 'text-rose-800',
+                            description: 'Silakan coba lagi beberapa saat lagi, atau hubungi HR Rekrutmen melalui WhatsApp.'
+                        }
+                    };
+
+                    function escapeHtml(value) {
+                        return String(value == null ? '' : value).replace(/[&<>"']/g, function (character) {
+                            return {
+                                '&': '&amp;',
+                                '<': '&lt;',
+                                '>': '&gt;',
+                                '"': '&quot;',
+                                "'": '&#39;'
+                            }[character];
+                        });
+                    }
+
+                    function setLoading(isLoading) {
+                        if (!input || !button) return;
+
+                        input.disabled = isLoading;
+                        button.disabled = isLoading;
+
+                        button.innerHTML = isLoading
+                            ? '<i class="fas fa-spinner fa-spin text-xs"></i><span>Memeriksa...</span>'
+                            : buttonMarkup;
+                    }
+
+                    function renderResult(kind, data) {
+                        var meta = copy[kind] || copy.error;
+                        var identity = '';
+
+                        if (data && (data.name || data.position)) {
+                            if (data.name) {
+                                identity += '<p class="text-sm font-semibold text-gray-900 truncate">' + escapeHtml(data.name) + '</p>';
+                            }
+                            if (data.position) {
+                                identity += '<p class="text-xs text-gray-500 mb-1 truncate">' + escapeHtml(data.position) + '</p>';
+                            } else {
+                                identity += '<div class="mb-1"></div>';
+                            }
+                        }
+
+                        resultBox.className = 'mt-4 rounded-xl border p-4 ' + meta.box;
+                        resultBox.innerHTML =
+                            '<div class="flex items-start gap-3">' +
+                                '<div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0 ' + meta.iconBox + '">' +
+                                    '<i class="fas ' + meta.icon + '"></i>' +
+                                '</div>' +
+                                '<div class="min-w-0 flex-1">' +
+                                    identity +
+                                    '<p class="text-sm font-bold ' + meta.titleColor + '">' + meta.title + '</p>' +
+                                    '<p class="text-xs text-gray-600 mt-1 leading-relaxed">' + meta.description + '</p>' +
+                                '</div>' +
+                            '</div>';
+
+                        resultBox.classList.remove('hidden');
+
+                        if (resultBox.scrollIntoView) {
+                            resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }
+
+                    form.addEventListener('submit', async function (event) {
+                        event.preventDefault();
+
+                        var email = input.value.trim();
+
+                        if (!email || !input.checkValidity()) {
+                            input.reportValidity();
+                            renderResult('invalid_email', null);
+                            input.focus();
+                            return;
+                        }
+
+                        setLoading(true);
+                        resultBox.classList.add('hidden');
+
+                        try {
+                            const res = await fetch(`${APPS_SCRIPT_URL}?email=${encodeURIComponent(email)}&sheet=Reference%20Check`);
+                            const response = await res.json();
+                            setLoading(false);
+
+                            if (!response || response.ok !== true) {
+                                renderResult(
+                                    response && response.error === 'invalid_email' ? 'invalid_email' : 'error',
+                                    null
+                                );
+                                return;
+                            }
+
+                            if (!response.found) {
+                                renderResult('not_found', null);
+                                return;
+                            }
+
+                            renderResult(response.status, response);
+                        } catch (error) {
+                            setLoading(false);
+                            console.error(error);
+                            renderResult('error', null);
+                        }
+                    });
+                })();
+            </script>
+
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="index.html" target="_top" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition">
+                    <i class="fas fa-arrow-left text-xs"></i>
+                    <span>Kembali ke Beranda</span>
+                </a>
+                <a href="https://wa.me/6282123758753?text=Halo%20HC%20PT%20Padepokan%20Tujuh%20Sembilan%2C%20saya%20ingin%20bertanya%20terkait%20proses%20rekrutmen." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 transition">
+                    <i class="fab fa-whatsapp text-base"></i>
+                    <span>Hubungi HR Rekrutmen</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating WhatsApp Button (Bottom Right) -->
+    <a href="https://wa.me/6282123758753?text=Halo%20HC%20PT%20Padepokan%20Tujuh%20Sembilan%2C%20saya%20ingin%20bertanya%20terkait%20proses%20rekrutmen."
+       target="_blank"
+       rel="noopener"
+       class="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110 z-50"
+       title="Contact HR Recruitment via WhatsApp"
+       aria-label="Contact HR Recruitment via WhatsApp">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-4 text-center text-xs text-gray-500">
+        &copy; 2026 PT Padepokan Tujuh Sembilan. Seluruh hak cipta dilindungi.
+    </footer>
+
+</body>
+</html>
